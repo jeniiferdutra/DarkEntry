@@ -29,44 +29,46 @@ class DarkEntryLoginView: UIView {
         let email = UITextField()
         email.translatesAutoresizingMaskIntoConstraints = false
         email.autocorrectionType = .no
-        email.backgroundColor = .clear
         email.textColor = .white
-        email.borderStyle = .none
         email.placeholder = "Email"
         email.attributedPlaceholder = NSAttributedString(
             string: "Email",
             attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
         )
         email.textAlignment = .center
-        email.layer.borderColor = UIColor.white.cgColor
         email.returnKeyType = .next
         email.keyboardType = .emailAddress
         email.clipsToBounds = true
-        email.layer.cornerRadius = 12
-        email.layer.borderWidth = 1.0
-        email.layer.borderColor = UIColor.white.cgColor
-        
-        let bottomLine = CALayer()
-            bottomLine.frame = CGRect(x: 0, y: email.frame.height - 1, width: email.frame.width, height: 1)
-            bottomLine.backgroundColor = UIColor.white.cgColor
-            email.layer.addSublayer(bottomLine)
         return email
+    }()
+    
+    lazy var lineEmail: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .white
+       return line
     }()
     
     lazy var passwordTextField: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
-        password.backgroundColor = UIColor.clear
         password.textColor = .white
         password.placeholder = "Password"
-        password.attributedPlaceholder = NSAttributedString(string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+        password.attributedPlaceholder = NSAttributedString(
+            string: "Password",
+            attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray]
+        )
         password.isSecureTextEntry = true
         password.textAlignment = .center
         password.layer.borderColor = UIColor.white.cgColor
-        password.layer.cornerRadius = 12
-        password.layer.borderWidth = 1.0
-        password.layer.borderColor = UIColor.white.cgColor
         return password
+    }()
+    
+    lazy var linePassword: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .white
+        return line
     }()
     
     lazy var buttonLogin: UIButton = {
@@ -91,20 +93,62 @@ class DarkEntryLoginView: UIView {
         return button
     }()
     
+    lazy var lineForgotPassword: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .white
+        return line
+    }()
+    
+    lazy var textLabel: UILabel = {
+        let txt = UILabel()
+        txt.translatesAutoresizingMaskIntoConstraints = false
+        txt.textColor = .white
+        txt.font = UIFont.systemFont(ofSize: 12)
+        txt.text = "Or login with"
+        return txt
+    }()
+    
+    lazy var lineTextOne: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .white
+        return line
+    }()
+    
+    lazy var lineTextTwo: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .white
+        return line
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(imageBackground)
         addSubview(titleLabel)
         addSubview(emailTextField)
+        addSubview(lineEmail)
         addSubview(passwordTextField)
+        addSubview(linePassword)
         addSubview(buttonLogin)
         addSubview(forgotPassword)
+        addSubview(lineForgotPassword)
+        addSubview(textLabel)
+        addSubview(lineTextOne)
+        addSubview(lineTextTwo)
         constrainImageBackground()
         constrainTitleLabel()
         constrainEmailTextField()
+        constrainLineEmail()
         constrainPasswordTextField()
+        constrainlinePassword()
         constrainButtonLogin()
         constrainForgotPassword()
+        constrainLineForgotPassword()
+        constrainTextLabel()
+        constrainLineTextOne()
+        constrainLineTextTwo()
     }
     
     required init?(coder: NSCoder) {
@@ -132,25 +176,43 @@ class DarkEntryLoginView: UIView {
     
     func constrainEmailTextField() {
         NSLayoutConstraint.activate([
-            emailTextField.topAnchor.constraint(equalTo: self.titleLabel.bottomAnchor, constant: 200),
-            emailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
-            emailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
+            emailTextField.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 200),
+            emailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            emailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
             emailTextField.heightAnchor.constraint(equalToConstant: 45)
+        ])
+    }
+    
+    func constrainLineEmail() {
+        NSLayoutConstraint.activate([
+            lineEmail.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 1),
+            lineEmail.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
+            lineEmail.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
+            lineEmail.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
     
     func constrainPasswordTextField() {
         NSLayoutConstraint.activate([
-            passwordTextField.topAnchor.constraint(equalTo: self.emailTextField.bottomAnchor, constant: 20),
-            passwordTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 30),
-            passwordTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -30),
+            passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 20),
+            passwordTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            passwordTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
             passwordTextField.heightAnchor.constraint(equalToConstant: 45)
+        ])
+    }
+    
+    func constrainlinePassword() {
+        NSLayoutConstraint.activate([
+            linePassword.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 1),
+            linePassword.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            linePassword.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
+            linePassword.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
     
     func constrainButtonLogin() {
         NSLayoutConstraint.activate([
-            buttonLogin.topAnchor.constraint(equalTo: self.passwordTextField.bottomAnchor, constant: 40),
+            buttonLogin.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 40),
             buttonLogin.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 110),
             buttonLogin.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -110),
             buttonLogin.heightAnchor.constraint(equalToConstant: 45)
@@ -159,10 +221,45 @@ class DarkEntryLoginView: UIView {
     
     func constrainForgotPassword() {
         NSLayoutConstraint.activate([
-            forgotPassword.topAnchor.constraint(equalTo: self.buttonLogin.bottomAnchor, constant: 10),
+            forgotPassword.topAnchor.constraint(equalTo: buttonLogin.bottomAnchor, constant: 10),
             forgotPassword.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 100),
             forgotPassword.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -100),
             forgotPassword.heightAnchor.constraint(equalToConstant: 45)
+        ])
+    }
+    
+    func constrainLineForgotPassword() {
+        NSLayoutConstraint.activate([
+            lineForgotPassword.topAnchor.constraint(equalTo: forgotPassword.bottomAnchor, constant: -12),
+            lineForgotPassword.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 138),
+            lineForgotPassword.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -138),
+            lineForgotPassword.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+    
+    func constrainTextLabel() {
+        NSLayoutConstraint.activate([
+            textLabel.topAnchor.constraint(equalTo: lineForgotPassword.bottomAnchor, constant: 40),
+            textLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 160),
+            textLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ])
+    }
+    
+    func constrainLineTextOne() {
+        NSLayoutConstraint.activate([
+            lineTextOne.topAnchor.constraint(equalTo: forgotPassword.bottomAnchor, constant: 37),
+            lineTextOne.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 250),
+            lineTextOne.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
+            lineTextOne.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+    
+    func constrainLineTextTwo() {
+        NSLayoutConstraint.activate([
+            lineTextTwo.topAnchor.constraint(equalTo: forgotPassword.bottomAnchor, constant: 37),
+            lineTextTwo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
+            lineTextTwo.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -250),
+            lineTextTwo.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
 }
