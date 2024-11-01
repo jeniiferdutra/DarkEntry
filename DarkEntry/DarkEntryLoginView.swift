@@ -123,6 +123,55 @@ class DarkEntryLoginView: UIView {
         return line
     }()
     
+    lazy var facebookImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "facebook")
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
+    lazy var twitterImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "twitter")
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
+    lazy var googleImage: UIImageView = {
+        let image = UIImageView()
+        image.translatesAutoresizingMaskIntoConstraints = false
+        image.image = UIImage(named: "google")
+        image.contentMode = .scaleAspectFit
+       return image
+    }()
+    
+    lazy var accountLabel: UILabel = {
+        let txt = UILabel()
+        txt.translatesAutoresizingMaskIntoConstraints = false
+        txt.font = UIFont.systemFont(ofSize: 15)
+        txt.textColor = .white
+        txt.text = "Don't have account?"
+        return txt
+    }()
+    
+    lazy var buttonRegister: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Register here", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.setTitleColor(.yellow, for: .normal)
+        return button
+    }()
+    
+    lazy var lineRegister: UIView = {
+        let line = UIView()
+        line.translatesAutoresizingMaskIntoConstraints = false
+        line.backgroundColor = .yellow
+        return line
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         addSubview(imageBackground)
@@ -137,6 +186,12 @@ class DarkEntryLoginView: UIView {
         addSubview(textLabel)
         addSubview(lineTextOne)
         addSubview(lineTextTwo)
+        addSubview(facebookImage)
+        addSubview(twitterImage)
+        addSubview(googleImage)
+        addSubview(accountLabel)
+        addSubview(buttonRegister)
+        addSubview(lineRegister)
         constrainImageBackground()
         constrainTitleLabel()
         constrainEmailTextField()
@@ -149,6 +204,13 @@ class DarkEntryLoginView: UIView {
         constrainTextLabel()
         constrainLineTextOne()
         constrainLineTextTwo()
+        constrainFacebook()
+        constrainTwitter()
+        constrainGoogle()
+        constrainAccountLabel()
+        constrainButtonRegister()
+        constrainLineRegister()
+        
     }
     
     required init?(coder: NSCoder) {
@@ -185,7 +247,7 @@ class DarkEntryLoginView: UIView {
     
     func constrainLineEmail() {
         NSLayoutConstraint.activate([
-            lineEmail.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 1),
+            lineEmail.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: -4),
             lineEmail.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
             lineEmail.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50),
             lineEmail.heightAnchor.constraint(equalToConstant: 1)
@@ -203,7 +265,7 @@ class DarkEntryLoginView: UIView {
     
     func constrainlinePassword() {
         NSLayoutConstraint.activate([
-            linePassword.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 1),
+            linePassword.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: -4),
             linePassword.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
             linePassword.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -50),
             linePassword.heightAnchor.constraint(equalToConstant: 1)
@@ -260,6 +322,55 @@ class DarkEntryLoginView: UIView {
             lineTextTwo.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 50),
             lineTextTwo.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -250),
             lineTextTwo.heightAnchor.constraint(equalToConstant: 1)
+        ])
+    }
+    
+    func constrainFacebook() {
+        NSLayoutConstraint.activate([
+            facebookImage.topAnchor.constraint(equalTo: lineTextTwo.bottomAnchor, constant: 25),
+            facebookImage.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 10),
+            facebookImage.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -200),
+            ])
+    }
+    
+    func constrainTwitter() {
+        NSLayoutConstraint.activate([
+            twitterImage.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 20),
+            twitterImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 50),
+            twitterImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -50)
+        ])
+    }
+    
+    func constrainGoogle() {
+        NSLayoutConstraint.activate([
+            googleImage.topAnchor.constraint(equalTo: lineTextOne.bottomAnchor, constant: 25),
+            googleImage.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 215),
+            googleImage.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ])
+    }
+    
+    func constrainAccountLabel() {
+        NSLayoutConstraint.activate([
+            accountLabel.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 100),
+            accountLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 80),
+            accountLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10)
+        ])
+    }
+    
+    func constrainButtonRegister() {
+        NSLayoutConstraint.activate([
+            buttonRegister.topAnchor.constraint(equalTo: textLabel.bottomAnchor, constant: 95),
+            buttonRegister.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 165),
+            buttonRegister.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -9)
+        ])
+    }
+    
+    func constrainLineRegister() {
+        NSLayoutConstraint.activate([
+            lineRegister.topAnchor.constraint(equalTo: buttonRegister.bottomAnchor, constant: -4),
+            lineRegister.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 228),
+            lineRegister.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -71),
+            lineRegister.heightAnchor.constraint(equalToConstant: 1)
         ])
     }
 }
