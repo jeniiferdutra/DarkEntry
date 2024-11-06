@@ -7,12 +7,22 @@
 
 import UIKit
 
+protocol DarkEntryLoginDelegate: AnyObject {
+    func tappedRegisterButton()
+}
+
 class DarkEntryLoginView: UIView {
+    
+    private weak var delegate: DarkEntryLoginDelegate?
+        
+        public func delegate(delegate: DarkEntryLoginDelegate?) {
+            self.delegate = delegate
+        }
     
     lazy var imageBackground: UIImageView = {
         let img = UIImageView()
         img.translatesAutoresizingMaskIntoConstraints = false
-        img.image = UIImage(named: "background")
+        img.image = UIImage(named: "backgroundLogin")
         return img
     }()
     
@@ -162,8 +172,13 @@ class DarkEntryLoginView: UIView {
         button.setTitle("Register here", for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         button.setTitleColor(.yellow, for: .normal)
+        button.addTarget(self, action: #selector(tappedRegisterButton), for: .touchUpInside)
         return button
     }()
+    
+    @objc func tappedRegisterButton() {
+            delegate?.tappedRegisterButton()
+        }
     
     lazy var lineRegister: UIView = {
         let line = UIView()
